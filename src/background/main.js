@@ -1,4 +1,4 @@
-import { app, protocol, BrowserWindow, Menu } from 'electron';
+import { app, protocol, BrowserWindow } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 
@@ -37,8 +37,8 @@ async function createWindow() {
 
 /* ================================================================ */
 /* ================================================================ */
-import { ipcMain } from 'electron';
-import * as dTree from 'directory-tree';
+import { ipcMain, Menu, dialog } from 'electron';
+import * as directoryTree from 'directory-tree';
 import * as fs from 'fs';
 
 ipcMain.on('READ_FILE', (event, payload) => {
@@ -57,12 +57,16 @@ ipcMain.on('WRITE_FILE', (event, payload) => {
   fs.writeFileSync(payload.path, payload.markdown);
 });
 
+const replyWithFileSystem = (event, payload) => {
+  const fileSystem = directoryTree(payload.root);
+  event.reply('FILE_SYSTEM', fileSystem);
+};
+
 ipcMain.on('FILE_SYSTEM', (event, payload) => {
-  const directoryTree = dTree(`${payload.path}`);
-  event.reply('FILE_SYSTEM', directoryTree);
+  replyWithFileSystem(event, payload);
 });
 
-ipcMain.on('FILE_CONTEXT_MENU', (event, path) => {
+ipcMain.on('FILE_CONTEXT_MENU', (event, payload) => {
   const template = [
     {
       label: 'Rename',
@@ -74,13 +78,16 @@ ipcMain.on('FILE_CONTEXT_MENU', (event, path) => {
     {
       label: 'Delete',
       click: () => {
-        console.log('deleting file!!!');
-        fs.unlinkSync(path);
-        event.reply('FILE_CONTEXT_MENU', 'deleting file');
-
-        let p = '/Users/suboptimaleng/Desktop/graphite';
-        const directoryTree = dTree(p);
-        event.reply('FILE_SYSTEM', directoryTree);
+        // const buttonIdx = dialog.showMessageBoxSync(win, {
+        const clickedButtonIdx = dialog.showMessageBoxSync({
+          type: 'question',
+          message: 'Are you sure you want to delete the file?',
+          buttons: ['Yes', 'No'],
+        });
+        if (clickedButtonIdx === 0) {
+          fs.unlinkSync(payload.path);
+          replyWithFileSystem(event, payload);
+        }
       },
     },
   ];

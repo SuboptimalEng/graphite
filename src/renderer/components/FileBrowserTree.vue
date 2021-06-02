@@ -47,17 +47,12 @@ export default {
     folderIsOpen({ path }) {
       return this.openFolders.includes(path);
     },
-    fileContextMenu({ path }) {
-      window.ipc.send('FILE_CONTEXT_MENU', path);
+    fileContextMenu({ path, root = this.root }) {
+      window.ipc.send('FILE_CONTEXT_MENU', { path, root });
     },
   },
-  mounted() {
-    window.ipc.on('FILE_CONTEXT_MENU', (a) => {
-      console.log(a);
-    });
-  },
   computed: {
-    ...mapGetters(['openFolders']),
+    ...mapGetters(['openFolders', 'root']),
 
     depthClass() {
       return `ml-${DEPTH_ENUM[this.depth]}`;

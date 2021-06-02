@@ -27,11 +27,11 @@ export default {
       this.fileSystem = fileSystem;
     });
 
-    this.getFileSystem({ path: this.root });
+    this.getFileSystem();
   },
   methods: {
-    getFileSystem({ path }) {
-      window.ipc.send('FILE_SYSTEM', { path });
+    getFileSystem({ root = this.root }) {
+      window.ipc.send('FILE_SYSTEM', { root });
     },
   },
   computed: {
