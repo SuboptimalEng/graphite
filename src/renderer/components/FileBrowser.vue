@@ -30,7 +30,7 @@ export default {
     this.getFileSystem();
   },
   methods: {
-    getFileSystem({ root = this.root }) {
+    getFileSystem(root = this.root) {
       window.ipc.send('FILE_SYSTEM', { root });
     },
   },
