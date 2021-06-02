@@ -1,2 +1,2 @@
 # Graphite
-✍️ A local-first markdown note-taking app.
+✍️ A local-first Markdown note-taking app.
