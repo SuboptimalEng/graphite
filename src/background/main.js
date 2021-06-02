@@ -1,4 +1,4 @@
-import { app, protocol, BrowserWindow } from 'electron';
+import { app, protocol, BrowserWindow, Menu } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 
@@ -10,7 +10,6 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 import * as path from 'path';
-
 async function createWindow() {
   // Create browser window.
   const win = new BrowserWindow({
@@ -60,8 +59,33 @@ ipcMain.on('WRITE_FILE', (event, payload) => {
 
 ipcMain.on('FILE_SYSTEM', (event, payload) => {
   const directoryTree = dTree(`${payload.path}`);
-  console.log(directoryTree);
   event.reply('FILE_SYSTEM', directoryTree);
+});
+
+ipcMain.on('FILE_CONTEXT_MENU', (event, path) => {
+  const template = [
+    {
+      label: 'Rename',
+      click: () => {
+        console.log('renaming file!!!');
+        event.reply('FILE_CONTEXT_MENU', 'renaming file');
+      },
+    },
+    {
+      label: 'Delete',
+      click: () => {
+        console.log('deleting file!!!');
+        fs.unlinkSync(path);
+        event.reply('FILE_CONTEXT_MENU', 'deleting file');
+
+        let p = '/Users/suboptimaleng/Desktop/graphite';
+        const directoryTree = dTree(p);
+        event.reply('FILE_SYSTEM', directoryTree);
+      },
+    },
+  ];
+  const menu = Menu.buildFromTemplate(template);
+  menu.popup(BrowserWindow.fromWebContents(event.sender));
 });
 /* ================================================================ */
 /* ================================================================ */

@@ -5,6 +5,7 @@ export default createStore({
     openFolders: [],
     openFileName: '',
     openFilePath: '',
+    root: '/Users/suboptimaleng/Desktop/graphite',
   },
   mutations: {
     updateOpenFolders(state, folderPath) {
@@ -15,12 +16,15 @@ export default createStore({
         state.openFolders.splice(idx, 1);
       }
     },
-    setFile(state, file) {
-      state.openFileName = file.name;
-      state.openFilePath = file.path;
+    setFile(state, { name, path }) {
+      state.openFileName = name;
+      state.openFilePath = path;
     },
   },
   getters: {
+    root(state) {
+      return state.root;
+    },
     openFolders(state) {
       return state.openFolders;
     },

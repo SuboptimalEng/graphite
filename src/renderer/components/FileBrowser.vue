@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import FileBrowserTree from './FileBrowserTree.vue';
 
 export default {
@@ -19,7 +20,6 @@ export default {
   data() {
     return {
       fileSystem: [],
-      path: '/Users/suboptimaleng/Desktop/graphite',
     };
   },
   mounted() {
@@ -27,12 +27,15 @@ export default {
       this.fileSystem = fileSystem;
     });
 
-    this.getFileSystem({ path: this.path });
+    this.getFileSystem({ path: this.root });
   },
   methods: {
     getFileSystem({ path }) {
       window.ipc.send('FILE_SYSTEM', { path });
     },
+  },
+  computed: {
+    ...mapGetters(['root']),
   },
 };
 </script>

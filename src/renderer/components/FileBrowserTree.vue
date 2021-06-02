@@ -10,7 +10,7 @@
         </button>
       </div>
 
-      <div v-if="folderIsOpen(item.path)">
+      <div v-if="folderIsOpen(item)">
         <FileBrowserTree
           :name="item.name"
           :type="item.type"
@@ -22,7 +22,7 @@
 
     <template v-else>
       <div :class="depthClass">
-        <button @click="setFile(item)">
+        <button @click="setFile(item)" @contextmenu="fileContextMenu(item)">
           {{ item.name }}
         </button>
       </div>
@@ -44,9 +44,17 @@ export default {
   methods: {
     ...mapMutations(['setFile', 'updateOpenFolders']),
 
-    folderIsOpen(path) {
+    folderIsOpen({ path }) {
       return this.openFolders.includes(path);
     },
+    fileContextMenu({ path }) {
+      window.ipc.send('FILE_CONTEXT_MENU', path);
+    },
+  },
+  mounted() {
+    window.ipc.on('FILE_CONTEXT_MENU', (a) => {
+      console.log(a);
+    });
   },
   computed: {
     ...mapGetters(['openFolders']),
