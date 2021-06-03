@@ -3,10 +3,11 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     fileSystem: [],
-    openFolders: [],
+    fileSystemGlob: [],
     openFileName: '',
     openFilePath: '',
     openFileType: '',
+    openFolders: [],
     root: '/Users/suboptimaleng/Desktop/graphite',
   },
   mutations: {
@@ -23,8 +24,9 @@ export default createStore({
       state.openFilePath = file.path;
       state.openFileType = file.type;
     },
-    setFileSystem(state, fileSystem) {
+    setFileSystem(state, { fileSystem, fileSystemGlob }) {
       state.fileSystem = fileSystem;
+      state.fileSystemGlob = fileSystemGlob;
     },
   },
   getters: {
@@ -33,6 +35,9 @@ export default createStore({
     },
     fileSystem(state) {
       return state.fileSystem;
+    },
+    fileSystemGlob(state) {
+      return state.fileSystemGlob;
     },
     openFolders(state) {
       return state.openFolders;

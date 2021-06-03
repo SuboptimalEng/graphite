@@ -17,6 +17,7 @@
           :name="fileOrFolder.name"
           :path="fileOrFolder.path"
           :type="fileOrFolder.type"
+          :extension="fileOrFolder.extension"
           :children="fileOrFolder.children"
           :depth="depth + 1"
         ></FileBrowserTree>
@@ -26,12 +27,18 @@
     <!-- File -->
     <template v-else>
       <div :class="depthClass">
-        <button
-          @click="setFile(fileOrFolder)"
-          @contextmenu="fileContextMenu(fileOrFolder)"
-        >
-          {{ fileOrFolder.name }}
-        </button>
+        <div v-if="fileIsBeingRenamed(fileOrFolder)">
+          <input type="text" v-model="newFileName" />
+          <button class="border border-black" @click="renameFile">Save</button>
+        </div>
+        <div v-else>
+          <button
+            @click="setFile(fileOrFolder)"
+            @contextmenu="fileContextMenu(fileOrFolder)"
+          >
+            {{ this.fileNameWithoutExtenstion(fileOrFolder) }}
+          </button>
+        </div>
       </div>
     </template>
   </div>
@@ -64,16 +71,39 @@ export default {
       type: Number,
       required: true,
     },
+    extension: {
+      type: String,
+    },
     children: {
       type: Array,
       required: true,
     },
   },
+  data() {
+    return {
+      renamingFile: false,
+      filePath: '',
+      oldFileName: '',
+      newFileName: '',
+    };
+  },
   methods: {
     ...mapMutations(['setFile', 'updateOpenFolders']),
 
+    fileNameWithoutExtenstion(file) {
+      if (file.extension === '.md') {
+        return file.name.slice(0, -3);
+      }
+
+      return file.name;
+    },
+
     folderIsOpen(folder) {
       return this.openFolders.includes(folder.path);
+    },
+
+    fileIsBeingRenamed(file) {
+      return this.renamingFile && file.path === this.filePath;
     },
 
     fileContextMenu(file) {
@@ -82,11 +112,55 @@ export default {
         fileName: file.name,
         filePath: file.path,
         fileType: file.type,
+        fileExtension: file.extension,
       });
     },
+
+    getParentDirectory(filePath) {
+      return filePath.split('/').slice(0, -1).join('/');
+    },
+
+    resetComponentData() {
+      this.renamingFile = false;
+      this.filePath = '';
+      this.oldFileName = '';
+      this.newFileName = '';
+    },
+
+    renameFile() {
+      console.log('renamingFile!!!');
+      const parentDirectory = this.getParentDirectory(this.filePath);
+      const oldFilePath = `${parentDirectory}/${this.oldFileName}.md`;
+      const newFilePath = `${parentDirectory}/${this.newFileName}.md`;
+      if (this.fileSystemGlob.includes(newFilePath)) {
+        console.log('file already exists');
+      } else {
+        console.log('renaming file to: ', this.newFileName);
+        window.ipc.send('RENAME_FILE', {
+          root: this.root,
+          oldFilePath,
+          newFilePath,
+        });
+      }
+      this.resetComponentData();
+    },
+  },
+  mounted() {
+    window.ipc.on('RENAME_FILE', (payload) => {
+      let fileNameWithoutExtenstion = payload.fileName;
+      if (payload.fileExtension === '.md') {
+        fileNameWithoutExtenstion = fileNameWithoutExtenstion.slice(0, -3);
+      }
+
+      this.renamingFile = true;
+      this.filePath = payload.filePath;
+      this.oldFileName = fileNameWithoutExtenstion;
+      this.newFileName = fileNameWithoutExtenstion;
+      console.log('on RENAME_FILE!!!', payload);
+    });
   },
   computed: {
-    ...mapGetters(['openFolders']),
+    ...mapGetters(['openFolders', 'fileSystemGlob']),
 
     depthClass() {
       return `ml-${DEPTH_ENUM[this.depth]}`;

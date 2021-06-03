@@ -39,6 +39,7 @@ async function createWindow() {
 /* ================================================================ */
 import { ipcMain, Menu, dialog } from 'electron';
 import * as directoryTree from 'directory-tree';
+import * as glob from 'glob';
 import * as fs from 'fs';
 
 ipcMain.on('READ_FILE', (event, payload) => {
@@ -58,16 +59,38 @@ ipcMain.on('WRITE_FILE', (event, payload) => {
 });
 
 const replyWithFileSystem = (event, payload) => {
-  const fileSystem = directoryTree(payload.root);
-  event.reply('FILE_SYSTEM', fileSystem);
+  const fileSystemGlob = glob.sync(`${payload.root}/**/*`);
+  const fileSystem = directoryTree(
+    payload.root,
+    {
+      // @TODO only display md files?
+      // extensions: /\.md/,
+    },
+    (item, filePath, stats) => {
+      // fileSystemGlob.push(filePath);
+    }
+  );
+
+  event.reply('FILE_SYSTEM', { fileSystem, fileSystemGlob });
 };
 
 ipcMain.on('FILE_SYSTEM', (event, payload) => {
   replyWithFileSystem(event, payload);
 });
 
+ipcMain.on('RENAME_FILE', (event, payload) => {
+  fs.renameSync(payload.oldFilePath, payload.newFilePath);
+  replyWithFileSystem(event, payload);
+});
+
 ipcMain.on('FILE_CONTEXT_MENU', (event, payload) => {
   const template = [
+    {
+      label: 'Rename',
+      click: () => {
+        event.reply('RENAME_FILE', payload);
+      },
+    },
     {
       label: 'Delete',
       click: () => {

@@ -6,9 +6,15 @@ const validSendChannels = [
   'WRITE_FILE',
   'FILE_SYSTEM',
   'FILE_CONTEXT_MENU',
+  'RENAME_FILE',
 ];
 
-const validOnChannels = ['READ_FILE', 'WRITE_FILE', 'FILE_SYSTEM'];
+const validOnChannels = [
+  'READ_FILE',
+  'WRITE_FILE',
+  'FILE_SYSTEM',
+  'RENAME_FILE',
+];
 
 contextBridge.exposeInMainWorld('ipc', {
   send: (channel, data) => {

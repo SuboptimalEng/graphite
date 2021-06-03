@@ -6,6 +6,7 @@
       :name="fileSystem.name"
       :type="fileSystem.type"
       :path="fileSystem.path"
+      :extension="fileSystem.extension"
       :children="fileSystem.children"
       :depth="0"
     ></FileBrowserTree>
@@ -22,8 +23,8 @@ export default {
     FileBrowserTree,
   },
   mounted() {
-    window.ipc.on('FILE_SYSTEM', (fileSystem) => {
-      this.setFileSystem(fileSystem);
+    window.ipc.on('FILE_SYSTEM', ({ fileSystem, fileSystemGlob }) => {
+      this.setFileSystem({ fileSystem, fileSystemGlob });
     });
 
     this.getFileSystem();

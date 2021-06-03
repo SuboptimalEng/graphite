@@ -1,6 +1,6 @@
 <template>
   <div class="absolute top-0 bottom-0 left-60 right-0 text-2xl">
-    <!-- @INSIGHT Value is bound to CodeMirror so this won't update markdown. -->
+    <!-- INSIGHT: Value is bound to CodeMirror so this won't update markdown. -->
     <textarea id="editor" :value="markdown"></textarea>
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
       });
     });
 
-    // @INSIGHT handle reply from the backend
+    // INSIGHT: handle reply from the backend
     window.ipc.on('READ_FILE', (markdown) => {
       this.cm.setValue(markdown);
     });
@@ -51,7 +51,7 @@ export default {
       });
     },
     readFile({ path }) {
-      // @INSIGHT ask backend to read file
+      // INSIGHT: ask backend to read file
       window.ipc.send('READ_FILE', { path });
     },
     openFile(path) {
@@ -62,7 +62,7 @@ export default {
     ...mapGetters(['openFileName', 'openFilePath']),
   },
   watch: {
-    // @INSIGHT this runs openFile if 'store.openFilePath' changes
+    // INSIGHT: this runs openFile if 'store.openFilePath' changes
     openFilePath: 'openFile',
   },
 };
