@@ -54,6 +54,20 @@ ipcMain.on('READ_FILE', (event, payload) => {
   }
 });
 
+ipcMain.on('CREATE_FILE', (event, payload) => {
+  let num = 1;
+  let filePath = `${payload.root}/Untitled.md`;
+  if (fs.existsSync(filePath)) {
+    const fileName = `${payload.root}/Untitled`;
+    while (fs.existsSync(`${fileName} ${num}.md`)) {
+      num += 1;
+    }
+    filePath = `${fileName} ${num}.md`;
+  }
+  fs.writeFileSync(filePath, `untitled file ${num}!!!`);
+  replyWithFileSystem(event, payload);
+});
+
 ipcMain.on('WRITE_FILE', (event, payload) => {
   fs.writeFileSync(payload.path, payload.markdown);
 });

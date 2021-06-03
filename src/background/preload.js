@@ -4,9 +4,10 @@ import { contextBridge, ipcRenderer } from 'electron';
 const validSendChannels = [
   'READ_FILE',
   'WRITE_FILE',
+  'CREATE_FILE',
+  'RENAME_FILE',
   'FILE_SYSTEM',
   'FILE_CONTEXT_MENU',
-  'RENAME_FILE',
 ];
 
 const validOnChannels = [
