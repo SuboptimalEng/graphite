@@ -128,14 +128,12 @@ export default {
     },
 
     renameFile() {
-      console.log('renamingFile!!!');
       const parentDirectory = this.getParentDirectory(this.filePath);
       const oldFilePath = `${parentDirectory}/${this.oldFileName}.md`;
       const newFilePath = `${parentDirectory}/${this.newFileName}.md`;
       if (this.fileSystemGlob.includes(newFilePath)) {
         console.log('file already exists');
       } else {
-        console.log('renaming file to: ', this.newFileName);
         window.ipc.send('RENAME_FILE', {
           root: this.root,
           oldFilePath,
@@ -156,7 +154,6 @@ export default {
       this.filePath = payload.filePath;
       this.oldFileName = fileNameWithoutExtenstion;
       this.newFileName = fileNameWithoutExtenstion;
-      console.log('on RENAME_FILE!!!', payload);
     });
   },
   computed: {
