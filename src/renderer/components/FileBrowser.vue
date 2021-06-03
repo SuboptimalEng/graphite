@@ -1,8 +1,10 @@
 <template>
   <div>
     <FileBrowserTree
+      :root="root"
       :name="fileSystem.name"
       :type="fileSystem.type"
+      :path="fileSystem.path"
       :children="fileSystem.children"
       :depth="0"
     ></FileBrowserTree>
@@ -14,6 +16,7 @@ import { mapGetters } from 'vuex';
 import FileBrowserTree from './FileBrowserTree.vue';
 
 export default {
+  name: 'FileBrowser',
   components: {
     FileBrowserTree,
   },

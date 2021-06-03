@@ -69,13 +69,6 @@ ipcMain.on('FILE_SYSTEM', (event, payload) => {
 ipcMain.on('FILE_CONTEXT_MENU', (event, payload) => {
   const template = [
     {
-      label: 'Rename',
-      click: () => {
-        console.log('renaming file!!!');
-        event.reply('FILE_CONTEXT_MENU', 'renaming file');
-      },
-    },
-    {
       label: 'Delete',
       click: () => {
         // const buttonIdx = dialog.showMessageBoxSync(win, {
@@ -85,7 +78,7 @@ ipcMain.on('FILE_CONTEXT_MENU', (event, payload) => {
           buttons: ['Yes', 'No'],
         });
         if (clickedButtonIdx === 0) {
-          fs.unlinkSync(payload.path);
+          fs.unlinkSync(payload.filePath);
           replyWithFileSystem(event, payload);
         }
       },

@@ -1,29 +1,34 @@
 <template>
-  <div v-for="item in children" :key="item">
-    <template v-if="item.type === 'directory'">
+  <div v-for="fileOrFolder in children" :key="fileOrFolder">
+    <!-- Folder -->
+    <template v-if="fileOrFolder.type === 'directory'">
       <div :class="depthClass">
         <button
-          @click="updateOpenFolders(item.path)"
+          @click="updateOpenFolders(fileOrFolder.path)"
           class="border border-black"
         >
-          {{ item.name }} /
+          {{ fileOrFolder.name }} /
         </button>
       </div>
 
-      <div v-if="folderIsOpen(item)">
+      <div v-if="folderIsOpen(fileOrFolder)">
         <FileBrowserTree
-          :name="item.name"
-          :type="item.type"
-          :children="item.children"
+          :name="fileOrFolder.name"
+          :type="fileOrFolder.type"
+          :children="fileOrFolder.children"
           :depth="depth + 1"
         ></FileBrowserTree>
       </div>
     </template>
 
+    <!-- File -->
     <template v-else>
       <div :class="depthClass">
-        <button @click="setFile(item)" @contextmenu="fileContextMenu(item)">
-          {{ item.name }}
+        <button
+          @click="setFile(fileOrFolder)"
+          @contextmenu="fileContextMenu(fileOrFolder)"
+        >
+          {{ fileOrFolder.name }}
         </button>
       </div>
     </template>
@@ -35,8 +40,11 @@ import { mapMutations, mapGetters } from 'vuex';
 import { DEPTH_ENUM } from '../shared/constants';
 
 export default {
+  name: 'FileBrowserTree',
   props: {
+    root: String,
     name: String,
+    path: String,
     type: String,
     children: Array,
     depth: Number,
@@ -44,15 +52,21 @@ export default {
   methods: {
     ...mapMutations(['setFile', 'updateOpenFolders']),
 
-    folderIsOpen({ path }) {
-      return this.openFolders.includes(path);
+    folderIsOpen(folder) {
+      return this.openFolders.includes(folder.path);
     },
-    fileContextMenu({ path, root = this.root }) {
-      window.ipc.send('FILE_CONTEXT_MENU', { path, root });
+
+    fileContextMenu(file) {
+      window.ipc.send('FILE_CONTEXT_MENU', {
+        root: this.root,
+        fileName: file.name,
+        filePath: file.path,
+        fileType: file.type,
+      });
     },
   },
   computed: {
-    ...mapGetters(['openFolders', 'root']),
+    ...mapGetters(['openFolders']),
 
     depthClass() {
       return `ml-${DEPTH_ENUM[this.depth]}`;
