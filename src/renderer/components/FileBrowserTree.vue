@@ -13,7 +13,9 @@
 
       <div v-if="folderIsOpen(fileOrFolder)">
         <FileBrowserTree
+          :root="root"
           :name="fileOrFolder.name"
+          :path="fileOrFolder.path"
           :type="fileOrFolder.type"
           :children="fileOrFolder.children"
           :depth="depth + 1"
@@ -42,12 +44,30 @@ import { DEPTH_ENUM } from '../shared/constants';
 export default {
   name: 'FileBrowserTree',
   props: {
-    root: String,
-    name: String,
-    path: String,
-    type: String,
-    children: Array,
-    depth: Number,
+    root: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    path: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    depth: {
+      type: Number,
+      required: true,
+    },
+    children: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
     ...mapMutations(['setFile', 'updateOpenFolders']),

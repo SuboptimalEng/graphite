@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
+    fileSystem: [],
     openFolders: [],
     openFileName: '',
     openFilePath: '',
@@ -22,10 +23,16 @@ export default createStore({
       state.openFilePath = file.path;
       state.openFileType = file.type;
     },
+    setFileSystem(state, fileSystem) {
+      state.fileSystem = fileSystem;
+    },
   },
   getters: {
     root(state) {
       return state.root;
+    },
+    fileSystem(state) {
+      return state.fileSystem;
     },
     openFolders(state) {
       return state.openFolders;

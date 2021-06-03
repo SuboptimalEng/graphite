@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="fileSystem.length === 0">Loading...</div>
+  <div v-else>
     <FileBrowserTree
       :root="root"
       :name="fileSystem.name"
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import FileBrowserTree from './FileBrowserTree.vue';
 
 export default {
@@ -20,25 +21,24 @@ export default {
   components: {
     FileBrowserTree,
   },
-  data() {
-    return {
-      fileSystem: [],
-    };
-  },
   mounted() {
     window.ipc.on('FILE_SYSTEM', (fileSystem) => {
-      this.fileSystem = fileSystem;
+      this.setFileSystem(fileSystem);
     });
 
     this.getFileSystem();
   },
   methods: {
-    getFileSystem(root = this.root) {
-      window.ipc.send('FILE_SYSTEM', { root });
+    ...mapMutations(['setFileSystem']),
+
+    getFileSystem() {
+      window.ipc.send('FILE_SYSTEM', {
+        root: this.root,
+      });
     },
   },
   computed: {
-    ...mapGetters(['root']),
+    ...mapGetters(['root', 'fileSystem']),
   },
 };
 </script>
