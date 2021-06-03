@@ -54,6 +54,15 @@ ipcMain.on('READ_FILE', (event, payload) => {
   }
 });
 
+ipcMain.on('MOVE_FILE', (event, payload) => {
+  console.log('moving file!!!');
+  fs.renameSync(
+    payload.file.path,
+    `${payload.folderPath}/${payload.file.name}`
+  );
+  replyWithFileSystem(event, payload);
+});
+
 ipcMain.on('CREATE_FILE', (event, payload) => {
   let num = 1;
   let filePath = `${payload.root}/Untitled.md`;

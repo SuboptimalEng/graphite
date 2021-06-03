@@ -2,6 +2,7 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
 const validSendChannels = [
+  'MOVE_FILE',
   'READ_FILE',
   'WRITE_FILE',
   'CREATE_FILE',

@@ -1,11 +1,14 @@
 <template>
   <div v-for="fileOrFolder in children" :key="fileOrFolder">
     <!-- Folder -->
-    <template v-if="fileOrFolder.type === 'directory'">
+    <div v-if="fileOrFolder.type === 'directory'">
       <div :class="depthClass">
         <button
           @click="updateOpenFolders(fileOrFolder.path)"
           class="border border-black"
+          @drop="dropFileIntoFolder($event, fileOrFolder)"
+          @dragover.prevent
+          @dragenter.prevent
         >
           {{ fileOrFolder.name }} /
         </button>
@@ -22,10 +25,10 @@
           :depth="depth + 1"
         ></FileBrowserTree>
       </div>
-    </template>
+    </div>
 
     <!-- File -->
-    <template v-else>
+    <div v-else>
       <div :class="depthClass">
         <div v-if="fileIsBeingRenamed(fileOrFolder)">
           <input type="text" v-model="newFileName" />
@@ -35,12 +38,14 @@
           <button
             @click="setFile(fileOrFolder)"
             @contextmenu="fileContextMenu(fileOrFolder)"
+            draggable="true"
+            @dragstart="startFileDrag($event, fileOrFolder)"
           >
             {{ this.fileNameWithoutExtenstion(fileOrFolder) }}
           </button>
         </div>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -89,6 +94,26 @@ export default {
   },
   methods: {
     ...mapMutations(['setFile', 'updateOpenFolders']),
+
+    dropFileIntoFolder(event, folder) {
+      const file = JSON.parse(event.dataTransfer.getData('file'));
+      if (this.fileSystemGlob.includes(`${folder.path}/${file.name}`)) {
+        console.log('file already exists!');
+      } else {
+        console.log(file, folder.path);
+        window.ipc.send('MOVE_FILE', {
+          file,
+          root: this.root,
+          folderPath: folder.path,
+        });
+        // remove current file
+        // add file to folder
+      }
+    },
+
+    startFileDrag(event, file) {
+      event.dataTransfer.setData('file', JSON.stringify(file));
+    },
 
     fileNameWithoutExtenstion(file) {
       if (file.extension === '.md') {
