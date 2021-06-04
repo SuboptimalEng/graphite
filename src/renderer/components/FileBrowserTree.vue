@@ -15,7 +15,13 @@
     <div v-if="fileOrFolder.type === 'directory'">
       <button
         :class="depthClass"
-        class="border border-text-normal focus:outline-none hover:bg-sidebar-bg-hover w-full text-left"
+        class="
+          border border-text-normal
+          focus:outline-none
+          hover:bg-sidebar-bg-hover
+          w-full
+          text-left
+        "
         @click="updateOpenFolders(fileOrFolder.path)"
         @drop="dropFileIntoFolder($event, fileOrFolder)"
         @dragover.prevent
@@ -57,7 +63,7 @@
           <div class="flex bg-sidebar-bg">
             <input
               type="text"
-              class="w-full focus:outline-none"
+              class="w-full focus:outline-none text-sidebar-bg bg-text-normal"
               v-model="newFileName"
             />
             <div>
@@ -72,7 +78,7 @@
         </div>
         <div v-else>
           <button
-            class="focus:outline-none"
+            class="focus:outline-none w-full text-left"
             @click="setFile(fileOrFolder)"
             @contextmenu="fileContextMenu(fileOrFolder)"
             draggable="true"
@@ -130,7 +136,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['setFile', 'updateOpenFolders']),
+    ...mapMutations(['setFile', 'updateOpenFolders', 'resetActiveFilePath']),
 
     dropFileIntoFolder(event, folder) {
       const file = JSON.parse(event.dataTransfer.getData('file'));
@@ -162,7 +168,13 @@ export default {
     },
 
     fileIsBeingRenamed(file) {
-      return this.renamingFile && file.path === this.filePath;
+      if (file.path === this.filePath) {
+        if (file.path === this.activeFilePath) {
+          this.resetActiveFilePath();
+        }
+        return true;
+      }
+      return false;
     },
 
     fileContextMenu(file) {

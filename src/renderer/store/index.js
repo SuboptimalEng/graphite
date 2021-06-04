@@ -31,6 +31,9 @@ export default createStore({
       state.fileSystem = fileSystem;
       state.fileSystemGlob = fileSystemGlob;
     },
+    resetActiveFilePath(state) {
+      state.activeFilePath = '';
+    },
   },
   getters: {
     root(state) {
