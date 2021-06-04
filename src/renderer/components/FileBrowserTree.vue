@@ -1,6 +1,7 @@
 <template>
   <div v-if="depth === 0">
     <div
+      class="font-black underline hover:bg-sidebar-bg-hover my-2 text-xl"
       @drop="dropFileIntoFolder($event, { path: root })"
       @dragover.prevent
       @dragenter.prevent
@@ -12,17 +13,16 @@
   <div v-for="fileOrFolder in children" :key="fileOrFolder">
     <!-- Folder -->
     <div v-if="fileOrFolder.type === 'directory'">
-      <div :class="depthClass">
-        <button
-          @click="updateOpenFolders(fileOrFolder.path)"
-          class="border border-black"
-          @drop="dropFileIntoFolder($event, fileOrFolder)"
-          @dragover.prevent
-          @dragenter.prevent
-        >
-          {{ fileOrFolder.name }} /
-        </button>
-      </div>
+      <button
+        :class="depthClass"
+        class="border border-black focus:outline-none hover:bg-sidebar-bg-hover w-full text-left"
+        @click="updateOpenFolders(fileOrFolder.path)"
+        @drop="dropFileIntoFolder($event, fileOrFolder)"
+        @dragover.prevent
+        @dragenter.prevent
+      >
+        {{ fileOrFolder.name }} /
+      </button>
 
       <div v-if="folderIsOpen(fileOrFolder)">
         <FileBrowserTree
@@ -38,7 +38,14 @@
     </div>
 
     <!-- File -->
-    <div v-else>
+    <div
+      v-else
+      :class="
+        activeFilePath === fileOrFolder.path
+          ? 'bg-item-active text-sidebar-bg'
+          : 'hover:bg-sidebar-bg-hover'
+      "
+    >
       <div :class="depthClass">
         <div v-if="fileIsBeingRenamed(fileOrFolder)">
           <input type="text" v-model="newFileName" />
@@ -46,6 +53,7 @@
         </div>
         <div v-else>
           <button
+            class="focus:outline-none"
             @click="setFile(fileOrFolder)"
             @contextmenu="fileContextMenu(fileOrFolder)"
             draggable="true"
@@ -189,7 +197,7 @@ export default {
     });
   },
   computed: {
-    ...mapGetters(['openFolders', 'fileSystemGlob']),
+    ...mapGetters(['openFolders', 'fileSystemGlob', 'activeFilePath']),
 
     depthClass() {
       return `ml-${DEPTH_ENUM[this.depth]}`;

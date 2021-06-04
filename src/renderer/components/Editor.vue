@@ -1,8 +1,6 @@
 <template>
-  <div class="absolute top-0 bottom-0 left-60 right-0 text-2xl">
-    <!-- INSIGHT: Value is bound to CodeMirror so this won't update markdown. -->
-    <textarea id="editor" :value="markdown"></textarea>
-  </div>
+  <!-- INSIGHT: Value is bound to CodeMirror so this won't update markdown. -->
+  <textarea id="editor" :value="markdown"></textarea>
 </template>
 
 <script>

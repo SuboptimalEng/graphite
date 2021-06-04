@@ -3,3 +3,14 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@layer base {
+  /* dracula */
+  :root {
+    --sidebar-bg: #282a36;
+    --sidebar-bg-hover: #44475a;
+    --item-active: #ff79c0;
+    --item-text-active: #1a1e24;
+    --text-normal: #f8f8f2;
+  }
+}

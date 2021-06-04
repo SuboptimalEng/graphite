@@ -1,18 +1,22 @@
 <template>
-  <div class="w-60">
-    <div v-if="fileSystem.length === 0">Loading...</div>
-    <div v-else>
-      <button class="border border-black" @click="createFile">New File</button>
-      <FileBrowserTree
-        :root="root"
-        :name="fileSystem.name"
-        :type="fileSystem.type"
-        :path="fileSystem.path"
-        :extension="fileSystem.extension"
-        :children="fileSystem.children"
-        :depth="0"
-      ></FileBrowserTree>
+  <div v-if="fileSystem.length === 0">Loading...</div>
+  <div v-else>
+    <div class="flex">
+      <div class="mx-auto">
+        <button class="border border-black" @click="createFile">
+          New File
+        </button>
+      </div>
     </div>
+    <FileBrowserTree
+      :root="root"
+      :name="fileSystem.name"
+      :type="fileSystem.type"
+      :path="fileSystem.path"
+      :extension="fileSystem.extension"
+      :children="fileSystem.children"
+      :depth="0"
+    ></FileBrowserTree>
   </div>
 </template>
 
