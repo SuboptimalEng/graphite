@@ -15,13 +15,19 @@
     <div v-if="fileOrFolder.type === 'directory'">
       <button
         :class="depthClass"
-        class="border border-black focus:outline-none hover:bg-sidebar-bg-hover w-full text-left"
+        class="border border-text-normal focus:outline-none hover:bg-sidebar-bg-hover w-full text-left"
         @click="updateOpenFolders(fileOrFolder.path)"
         @drop="dropFileIntoFolder($event, fileOrFolder)"
         @dragover.prevent
         @dragenter.prevent
       >
-        {{ fileOrFolder.name }} /
+        <div class="flex space-x-1 place-items-center">
+          <div v-if="openFolders.includes(fileOrFolder.path)">▼</div>
+          <div v-else>▶</div>
+          <div>
+            {{ fileOrFolder.name }}
+          </div>
+        </div>
       </button>
 
       <div v-if="folderIsOpen(fileOrFolder)">
@@ -48,8 +54,21 @@
     >
       <div :class="depthClass">
         <div v-if="fileIsBeingRenamed(fileOrFolder)">
-          <input type="text" v-model="newFileName" />
-          <button class="border border-black" @click="renameFile">Save</button>
+          <div class="flex bg-sidebar-bg">
+            <input
+              type="text"
+              class="w-full focus:outline-none"
+              v-model="newFileName"
+            />
+            <div>
+              <button
+                class="border border-text-normal text-text-normal bg-sidebar-bg"
+                @click="renameFile"
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </div>
         <div v-else>
           <button
