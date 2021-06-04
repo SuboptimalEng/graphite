@@ -7,6 +7,7 @@
 import CodeMirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
+import 'codemirror/theme/gruvbox-dark.css';
 import 'codemirror/mode/gfm/gfm';
 import { mapGetters } from 'vuex';
 
@@ -19,7 +20,7 @@ export default {
   mounted() {
     this.cm = CodeMirror.fromTextArea(document.getElementById('editor'), {
       mode: 'gfm',
-      theme: 'dracula',
+      theme: 'gruvbox-dark',
       // fullScreen: true,
       // lineNumbers: true,
       viewportMargin: Infinity,
