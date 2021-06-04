@@ -82,7 +82,7 @@ ipcMain.on('WRITE_FILE', (event, payload) => {
 });
 
 const replyWithFileSystem = (event, payload) => {
-  const fileSystemGlob = glob.sync(`${payload.root}/**/*`);
+  const fileSystemGlob = [payload.root, ...glob.sync(`${payload.root}/**/*`)];
   const fileSystem = directoryTree(
     payload.root,
     {

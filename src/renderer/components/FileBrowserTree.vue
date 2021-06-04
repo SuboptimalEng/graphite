@@ -1,4 +1,14 @@
 <template>
+  <div v-if="depth === 0">
+    <div
+      @drop="dropFileIntoFolder($event, { path: root })"
+      @dragover.prevent
+      @dragenter.prevent
+    >
+      Graphite
+    </div>
+  </div>
+
   <div v-for="fileOrFolder in children" :key="fileOrFolder">
     <!-- Folder -->
     <div v-if="fileOrFolder.type === 'directory'">
@@ -100,14 +110,11 @@ export default {
       if (this.fileSystemGlob.includes(`${folder.path}/${file.name}`)) {
         console.log('file already exists!');
       } else {
-        console.log(file, folder.path);
         window.ipc.send('MOVE_FILE', {
           file,
           root: this.root,
           folderPath: folder.path,
         });
-        // remove current file
-        // add file to folder
       }
     },
 
