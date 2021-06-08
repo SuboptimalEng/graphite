@@ -10,6 +10,7 @@ import 'codemirror/theme/dracula.css';
 import 'codemirror/theme/gruvbox-dark.css';
 import 'codemirror/mode/gfm/gfm';
 import { mapGetters } from 'vuex';
+import themes from '../utils/themes.ts';
 
 export default {
   data() {
@@ -20,7 +21,7 @@ export default {
   mounted() {
     this.cm = CodeMirror.fromTextArea(document.getElementById('editor'), {
       mode: 'gfm',
-      theme: 'gruvbox-dark',
+      theme: themes[this.theme].codeMirror,
       // fullScreen: true,
       // lineNumbers: true,
       viewportMargin: Infinity,
@@ -56,13 +57,18 @@ export default {
     openFile(path) {
       this.readFile({ path });
     },
+    setTheme(theme) {
+      // INSIGHT: change theme in code mirror
+      this.cm.setOption('theme', themes[theme].codeMirror);
+    },
   },
   computed: {
-    ...mapGetters(['openFileName', 'openFilePath']),
+    ...mapGetters(['openFileName', 'openFilePath', 'theme']),
   },
   watch: {
     // INSIGHT: this runs openFile if 'store.openFilePath' changes
     openFilePath: 'openFile',
+    theme: 'setTheme',
   },
 };
 </script>

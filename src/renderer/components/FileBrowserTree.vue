@@ -1,7 +1,7 @@
 <template>
   <div v-if="depth === 0">
     <div
-      class="font-black underline hover:bg-sidebar-bg-hover my-2 text-xl"
+      class="font-black underline hover:bg-sidebar-bg-hover my-2 text-xl border"
       @drop="dropFileIntoFolder($event, { path: root })"
       @dragover.prevent
       @dragenter.prevent

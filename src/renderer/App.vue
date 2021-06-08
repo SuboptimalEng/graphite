@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="theme"
+    :class="appTheme"
     class="min-h-screen bg-gray-300 bg-sidebar-bg text-text-normal font-mono"
   >
     <div
@@ -35,19 +35,35 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Editor from './components/Editor.vue';
 import FileBrowser from './components/FileBrowser.vue';
+import themes from './utils/themes.ts';
 
 export default {
   name: 'App',
   data() {
     return {
-      theme: 'theme-gruvbox',
+      appTheme: '',
     };
+  },
+  mounted() {
+    this.setTheme();
   },
   components: {
     Editor,
     FileBrowser,
+  },
+  methods: {
+    setTheme() {
+      this.appTheme = themes[this.theme].graphite;
+    },
+  },
+  computed: {
+    ...mapGetters(['theme']),
+  },
+  watch: {
+    theme: 'setTheme',
   },
 };
 </script>

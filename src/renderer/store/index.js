@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
+    theme: 'dracula',
     activeFilePath: '',
 
     fileSystem: [],
@@ -13,6 +14,13 @@ export default createStore({
     root: '/Users/suboptimaleng/Desktop/graphite',
   },
   mutations: {
+    toggleTheme(state) {
+      if (state.theme === 'dracula') {
+        state.theme = 'gruvbox';
+      } else {
+        state.theme = 'dracula';
+      }
+    },
     updateOpenFolders(state, folderPath) {
       const idx = state.openFolders.indexOf(folderPath);
       if (idx < 0) {
@@ -36,6 +44,9 @@ export default createStore({
     },
   },
   getters: {
+    theme(state) {
+      return state.theme;
+    },
     root(state) {
       return state.root;
     },

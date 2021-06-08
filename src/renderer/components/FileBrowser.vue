@@ -2,9 +2,12 @@
   <div v-if="fileSystem.length === 0">Loading...</div>
   <div v-else>
     <div class="flex">
-      <div class="mx-auto">
+      <div class="mx-auto space-x-2">
         <button class="border border-black" @click="createFile">
           New File
+        </button>
+        <button class="border border-black" @click="toggleTheme">
+          Toggle Theme
         </button>
       </div>
     </div>
@@ -37,7 +40,7 @@ export default {
     this.getFileSystem();
   },
   methods: {
-    ...mapMutations(['setFileSystem']),
+    ...mapMutations(['setFileSystem', 'toggleTheme']),
 
     createFile() {
       window.ipc.send('CREATE_FILE', {
@@ -52,7 +55,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['root', 'fileSystem']),
+    ...mapGetters(['root', 'fileSystem', 'theme']),
   },
 };
 </script>
