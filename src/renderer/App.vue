@@ -3,21 +3,19 @@
     :class="appTheme"
     class="min-h-screen bg-gray-300 bg-sidebar-bg text-text-normal font-mono"
   >
-    <!-- <div
+    <div
       class="
-        border border-text-normal
+        border-r border-text-normal
         min-h-screen
         absolute
         top-0
         bottom-0
         left-0
-        w-60
-        overflow-x-hidden
-        no-scrollbar
+        w-12
       "
     >
-      <FileBrowser></FileBrowser>
-    </div> -->
+      <Navigation></Navigation>
+    </div>
     <div
       class="
         border border-text-normal
@@ -25,13 +23,13 @@
         absolute
         top-0
         bottom-0
-        left-0
+        left-12
         w-60
         overflow-x-hidden
         no-scrollbar
       "
     >
-      <FileBrowser></FileBrowser>
+      <Sidebar></Sidebar>
     </div>
     <div
       class="
@@ -39,21 +37,21 @@
         border border-text-normal
         top-0
         bottom-0
-        left-60
+        left-72
         right-0
         text-2xl
       "
     >
-      <Settings></Settings>
+      <Editor></Editor>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import Navigation from './components/Navigation.vue';
 import Editor from './components/Editor.vue';
-import Settings from './components/Settings.vue';
-import FileBrowser from './components/FileBrowser.vue';
+import Sidebar from './components/Sidebar.vue';
 import themes from './utils/themes.ts';
 
 export default {
@@ -61,16 +59,15 @@ export default {
   data() {
     return {
       appTheme: '',
-      components: [Settings, FileBrowser],
     };
   },
   mounted() {
     this.setTheme();
   },
   components: {
+    Navigation,
+    Sidebar,
     Editor,
-    Settings,
-    FileBrowser,
   },
   methods: {
     setTheme() {

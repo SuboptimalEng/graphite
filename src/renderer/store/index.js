@@ -1,9 +1,12 @@
 import { createStore } from 'vuex';
+import themes from '../utils/themes.ts';
 
 export default createStore({
   state: {
-    theme: 'dracula',
+    theme: Object.keys(themes)[0],
     activeFilePath: '',
+    // TODO: factor 'fileBrowser' and 'settings' out.
+    activeSidebarItem: 'fileBrowser',
 
     fileSystem: [],
     fileSystemGlob: [],
@@ -14,6 +17,9 @@ export default createStore({
     root: '/Users/suboptimaleng/Desktop/graphite',
   },
   mutations: {
+    setActiveSidebarItem(state, item) {
+      state.activeSidebarItem = item;
+    },
     setTheme(state, theme) {
       state.theme = theme;
     },
@@ -47,6 +53,9 @@ export default createStore({
     },
   },
   getters: {
+    activeSidebarItem(state) {
+      return state.activeSidebarItem;
+    },
     theme(state) {
       return state.theme;
     },
