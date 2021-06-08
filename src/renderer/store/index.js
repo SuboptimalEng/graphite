@@ -14,6 +14,9 @@ export default createStore({
     root: '/Users/suboptimaleng/Desktop/graphite',
   },
   mutations: {
+    setTheme(state, theme) {
+      state.theme = theme;
+    },
     toggleTheme(state) {
       if (state.theme === 'dracula') {
         state.theme = 'gruvbox';
