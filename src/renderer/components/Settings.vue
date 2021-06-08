@@ -14,6 +14,20 @@
         Toggle Theme
       </button>
     </div>
+    <div>
+      <button
+        class="
+          border
+          w-full
+          text-left
+          focus:outline-none
+          hover:bg-sidebar-bg-hover
+        "
+        @click="toggleLineNumbers"
+      >
+        Toggle Line Numbers
+      </button>
+    </div>
     <div class="relative" v-click-outside="hideThemeDropdownDiv">
       <button
         class="
@@ -59,7 +73,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['toggleTheme', 'setTheme']),
+    ...mapMutations(['toggleTheme', 'toggleLineNumbers', 'setTheme']),
 
     showDropdown() {
       return this.showThemesDropdown;

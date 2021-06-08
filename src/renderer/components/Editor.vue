@@ -61,14 +61,18 @@ export default {
       // INSIGHT: change theme in code mirror
       this.cm.setOption('theme', themes[theme].codeMirror);
     },
+    setLineNumbers(lineNumbers) {
+      this.cm.setOption('lineNumbers', lineNumbers);
+    },
   },
   computed: {
-    ...mapGetters(['openFileName', 'openFilePath', 'theme']),
+    ...mapGetters(['openFileName', 'openFilePath', 'theme', 'lineNumbers']),
   },
   watch: {
     // INSIGHT: this runs openFile if 'store.openFilePath' changes
-    openFilePath: 'openFile',
     theme: 'setTheme',
+    openFilePath: 'openFile',
+    lineNumbers: 'setLineNumbers',
   },
 };
 </script>

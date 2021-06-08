@@ -8,6 +8,7 @@ export default createStore({
     // TODO: factor 'fileBrowser' and 'settings' out.
     activeSidebarItem: 'fileBrowser',
 
+    lineNumbers: false,
     fileSystem: [],
     fileSystemGlob: [],
     openFileName: '',
@@ -44,6 +45,10 @@ export default createStore({
       state.openFilePath = file.path;
       state.openFileType = file.type;
     },
+    toggleLineNumbers(state) {
+      console.log('toggle line numbers');
+      state.lineNumbers = !state.lineNumbers;
+    },
     setFileSystem(state, { fileSystem, fileSystemGlob }) {
       state.fileSystem = fileSystem;
       state.fileSystemGlob = fileSystemGlob;
@@ -53,6 +58,9 @@ export default createStore({
     },
   },
   getters: {
+    lineNumbers(state) {
+      return state.lineNumbers;
+    },
     activeSidebarItem(state) {
       return state.activeSidebarItem;
     },
