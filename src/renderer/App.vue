@@ -1,11 +1,11 @@
 <template>
   <div
     :class="appTheme"
-    class="min-h-screen bg-gray-300 bg-sidebar-bg text-text-normal font-mono"
+    class="min-h-screen bg-sidebar-bg text-text-normal font-mono"
   >
     <div
       class="
-        border-r border-text-normal
+        border border-text-normal
         min-h-screen
         absolute
         top-0
