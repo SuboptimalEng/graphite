@@ -6,6 +6,13 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
+      // INSIGHT: Displaying transparent screens.
+      // 'sidebar-bg': ({ opacityValue }) => {
+      //   if (opacityValue !== undefined) {
+      //     return `rgba(var(--sidebar-bg), ${opacityValue})`;
+      //   }
+      //   return `rgb(var(--sidebar-bg))`;
+      // },
       'sidebar-bg': 'var(--sidebar-bg)',
       'sidebar-bg-hover': 'var(--sidebar-bg-hover)',
       'item-active': 'var(--item-active)',

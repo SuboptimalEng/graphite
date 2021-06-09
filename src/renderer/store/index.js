@@ -5,7 +5,7 @@ export default createStore({
   state: {
     theme: Object.keys(themes)[0],
     activeFilePath: '',
-    // TODO: factor 'fileBrowser' and 'settings' out.
+    // TODO: refactor 'fileBrowser' and 'settings' and avoid magic values.
     activeSidebarItem: 'fileBrowser',
 
     lineNumbers: false,
