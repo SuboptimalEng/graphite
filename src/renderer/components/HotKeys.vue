@@ -4,19 +4,27 @@
 
 <script>
 import hotkeys from 'hotkeys-js';
-import { mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import { KEYBOARD_SHORTCUTS } from '../shared/constants';
 
 export default {
   name: 'HotKeys',
   methods: {
-    ...mapMutations(['toggleSidebar']),
+    ...mapMutations(['toggleSidebar', 'setPlatformName']),
+  },
+  computed: {
+    ...mapGetters(['platformName']),
   },
   mounted() {
-    KEYBOARD_SHORTCUTS.forEach((command) => {
-      const keybindings = [command.mac, command.windows].join(',');
-      // INSIGHT: dynamically call vue methods => this[command.name]()
-      hotkeys(keybindings, () => this[command.name]());
+    window.ipc.send('GET_OS');
+
+    window.ipc.on('GET_OS', ({ platformName }) => {
+      this.setPlatformName(platformName);
+      KEYBOARD_SHORTCUTS.forEach((command) => {
+        const keybinding = command[platformName];
+        // INSIGHT: dynamically call vue methods => this[command.name]()
+        hotkeys(keybinding, () => this[command.name]());
+      });
     });
   },
   unmounted() {

@@ -3,6 +3,8 @@ import themes from '../utils/themes.ts';
 
 export default createStore({
   state: {
+    platformName: '',
+
     theme: Object.keys(themes)[0],
     activeFilePath: '',
     // TODO: refactor 'fileBrowser' and 'settings' and avoid magic values.
@@ -25,6 +27,9 @@ export default createStore({
     },
     toggleSidebar(state) {
       state.sidebarActive = !state.sidebarActive;
+    },
+    setPlatformName(state, name) {
+      state.platformName = name;
     },
     setActiveSidebarItem(state, item) {
       state.activeSidebarItem = item;
@@ -54,7 +59,6 @@ export default createStore({
       state.openFileType = file.type;
     },
     toggleLineNumbers(state) {
-      console.log('toggle line numbers');
       state.lineNumbers = !state.lineNumbers;
     },
     setFileSystem(state, { fileSystem, fileSystemGlob }) {
@@ -66,6 +70,9 @@ export default createStore({
     },
   },
   getters: {
+    platformName(state) {
+      return state.platformName;
+    },
     sidebarActive(state) {
       return state.sidebarActive;
     },

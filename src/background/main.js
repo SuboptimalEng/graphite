@@ -43,6 +43,22 @@ import { ipcMain, Menu, dialog } from 'electron';
 import * as directoryTree from 'directory-tree';
 import * as glob from 'glob';
 import * as fs from 'fs';
+import * as os from 'os';
+
+ipcMain.on('GET_OS', (event, payload) => {
+  const platforms = {
+    WINDOWS: 'windows',
+    MAC: 'mac',
+    LINUX: 'linux',
+  };
+  const platformsNames = {
+    win32: platforms.WINDOWS,
+    darwin: platforms.MAC,
+    linux: platforms.LINUX,
+  };
+  const platformName = platformsNames[os.platform()];
+  event.reply('GET_OS', { platformName });
+});
 
 ipcMain.on('READ_FILE', (event, payload) => {
   if (fs.existsSync(payload.path)) {
