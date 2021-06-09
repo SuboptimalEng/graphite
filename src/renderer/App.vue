@@ -1,7 +1,7 @@
 <template>
   <div
     :class="appTheme"
-    class="min-h-screen bg-sidebar-bg text-text-normal font-mono"
+    class="min-h-screen bg-sidebar-bg text-text-normal font-mono relative"
   >
     <div
       class="
@@ -36,10 +36,15 @@
       <Sidebar></Sidebar>
     </div>
     <div
-      class="absolute border border-text-normal top-0 bottom-0 right-0 text-2xl"
+      class="absolute border top-0 bottom-0 right-0 text-2xl"
       :class="sidebarActive ? 'left-72' : 'left-12'"
     >
-      <Editor></Editor>
+      <div v-if="openFilePath">
+        <Editor></Editor>
+      </div>
+      <div v-else>
+        <BlankPage></BlankPage>
+      </div>
     </div>
   </div>
 </template>
@@ -50,6 +55,7 @@ import { mapGetters } from 'vuex';
 import Editor from './components/Editor.vue';
 import HotKeys from './components/HotKeys.vue';
 import Sidebar from './components/Sidebar.vue';
+import BlankPage from './components/BlankPage.vue';
 import Navigation from './components/Navigation.vue';
 
 import themes from './utils/themes.ts';
@@ -65,6 +71,7 @@ export default {
     Editor,
     HotKeys,
     Sidebar,
+    BlankPage,
     Navigation,
   },
   mounted() {
@@ -76,7 +83,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['theme', 'sidebarActive']),
+    ...mapGetters(['theme', 'sidebarActive', 'openFilePath']),
   },
   watch: {
     theme: 'setTheme',

@@ -9,9 +9,9 @@
           focus:outline-none
           hover:bg-sidebar-bg-hover
         "
-        @click="toggleTheme"
+        @click="toggleLineNumbers"
       >
-        Toggle Theme
+        Toggle Line Numbers
       </button>
     </div>
     <div>
@@ -23,9 +23,9 @@
           focus:outline-none
           hover:bg-sidebar-bg-hover
         "
-        @click="toggleLineNumbers"
+        @click="toggleTheme"
       >
-        Toggle Line Numbers
+        Toggle Theme
       </button>
     </div>
     <div class="relative" v-click-outside="hideThemeDropdownDiv">
