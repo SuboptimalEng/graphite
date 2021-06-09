@@ -8,6 +8,8 @@ export default createStore({
     // TODO: refactor 'fileBrowser' and 'settings' and avoid magic values.
     activeSidebarItem: 'fileBrowser',
 
+    sidebarActive: true,
+
     lineNumbers: false,
     fileSystem: [],
     fileSystemGlob: [],
@@ -58,6 +60,9 @@ export default createStore({
     },
   },
   getters: {
+    sidebarActive(state) {
+      return state.sidebarActive;
+    },
     lineNumbers(state) {
       return state.lineNumbers;
     },

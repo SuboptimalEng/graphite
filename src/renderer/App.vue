@@ -28,19 +28,13 @@
         overflow-x-hidden
         no-scrollbar
       "
+      v-if="sidebarActive"
     >
       <Sidebar></Sidebar>
     </div>
     <div
-      class="
-        absolute
-        border border-text-normal
-        top-0
-        bottom-0
-        left-72
-        right-0
-        text-2xl
-      "
+      class="absolute border border-text-normal top-0 bottom-0 right-0 text-2xl"
+      :class="sidebarActive ? 'left-72' : 'left-12'"
     >
       <Editor></Editor>
     </div>
@@ -75,7 +69,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['theme']),
+    ...mapGetters(['theme', 'sidebarActive']),
   },
   watch: {
     theme: 'setTheme',
