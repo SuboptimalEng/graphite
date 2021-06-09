@@ -1,10 +1,15 @@
 <template>
   <div class="absolute top-0 bottom-0 left-0 right-0 bg-sidebar-bg">
     <div class="flex flex-col space-y-4 p-24">
-      <div class="text-xl font-black">File Search</div>
+      <div>
+        <div class="text-xl font-black">File Search</div>
+        <div class="text-xs">Press `Esc` to Exit</div>
+      </div>
       <input
         type="text"
         v-model="query"
+        ref="fileSearch"
+        @keydown.esc="closeFileSearch"
         class="bg-sidebar-bg border focus:outline-none"
       />
       <div class="text-xl font-black">Files</div>
@@ -42,8 +47,11 @@ export default {
       query: '',
     };
   },
+  mounted() {
+    this.$refs.fileSearch.focus();
+  },
   methods: {
-    ...mapMutations(['openFileFormFileSearch']),
+    ...mapMutations(['openFileFormFileSearch', 'closeFileSearch']),
 
     fileContainsQuery(file) {
       if (this.query.length === 0) {
