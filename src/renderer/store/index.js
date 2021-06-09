@@ -5,6 +5,8 @@ export default createStore({
   state: {
     platformName: '',
 
+    openFileSearch: false,
+
     theme: Object.keys(themes)[0],
     activeFilePath: '',
     // TODO: refactor 'fileBrowser' and 'settings' and avoid magic values.
@@ -52,6 +54,20 @@ export default createStore({
         state.openFolders.splice(idx, 1);
       }
     },
+    closeFileSearch(state) {
+      state.openFileSearch = false;
+    },
+    openFileSearch(state) {
+      state.openFileSearch = true;
+    },
+    openFileFormFileSearch(state, filePath) {
+      const filePathSplit = filePath.split('/');
+      state.activeFilePath = filePath;
+      state.openFileName = filePathSplit[filePathSplit.length - 1];
+      state.openFilePath = filePath;
+      state.openFileType = '.md';
+      state.openFileSearch = false;
+    },
     setFile(state, file) {
       state.activeFilePath = file.path;
       state.openFileName = file.name;
@@ -70,6 +86,9 @@ export default createStore({
     },
   },
   getters: {
+    openFileSearch(state) {
+      return state.openFileSearch;
+    },
     platformName(state) {
       return state.platformName;
     },
@@ -93,6 +112,15 @@ export default createStore({
     },
     fileSystem(state) {
       return state.fileSystem;
+    },
+    fileGlob(state) {
+      const fileGlob = [];
+      state.fileSystemGlob.forEach((file) => {
+        if (file.endsWith('.md')) {
+          fileGlob.push(file);
+        }
+      });
+      return fileGlob;
     },
     fileSystemGlob(state) {
       return state.fileSystemGlob;

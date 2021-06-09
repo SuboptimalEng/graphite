@@ -10,7 +10,12 @@ import { KEYBOARD_SHORTCUTS } from '../shared/constants';
 export default {
   name: 'HotKeys',
   methods: {
-    ...mapMutations(['toggleSidebar', 'setPlatformName']),
+    ...mapMutations([
+      'toggleSidebar',
+      'openFileSearch',
+      'closeFileSearch',
+      'setPlatformName',
+    ]),
   },
   computed: {
     ...mapGetters(['platformName']),

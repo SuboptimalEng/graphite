@@ -39,12 +39,15 @@
       class="absolute border top-0 bottom-0 right-0 text-2xl"
       :class="sidebarActive ? 'left-72' : 'left-12'"
     >
-      <div v-if="openFilePath">
+      <div v-if="activeFilePath && !openFileSearch">
         <Editor></Editor>
       </div>
       <div v-else>
         <BlankPage></BlankPage>
       </div>
+    </div>
+    <div v-if="openFileSearch">
+      <FileSearch></FileSearch>
     </div>
   </div>
 </template>
@@ -57,6 +60,7 @@ import HotKeys from './components/HotKeys.vue';
 import Sidebar from './components/Sidebar.vue';
 import BlankPage from './components/BlankPage.vue';
 import Navigation from './components/Navigation.vue';
+import FileSearch from './components/FileSearch.vue';
 
 import themes from './utils/themes.ts';
 
@@ -73,6 +77,7 @@ export default {
     Sidebar,
     BlankPage,
     Navigation,
+    FileSearch,
   },
   mounted() {
     this.setTheme();
@@ -83,7 +88,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['theme', 'sidebarActive', 'openFilePath']),
+    ...mapGetters([
+      'theme',
+      'sidebarActive',
+      'activeFilePath',
+      'openFileSearch',
+    ]),
   },
   watch: {
     theme: 'setTheme',

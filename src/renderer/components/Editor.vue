@@ -66,7 +66,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['openFileName', 'openFilePath', 'theme', 'lineNumbers']),
+    ...mapGetters(['openFilePath', 'theme', 'lineNumbers']),
   },
   watch: {
     // INSIGHT: this runs openFile if 'store.openFilePath' changes

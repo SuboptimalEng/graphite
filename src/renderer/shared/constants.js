@@ -21,6 +21,19 @@ const KEYBOARD_SHORTCUTS = [
     name: 'toggleSidebar',
     mac: 'command+b',
     windows: 'ctrl+b',
+    linux: 'ctrl+b',
+  },
+  {
+    name: 'openFileSearch',
+    mac: 'command+o',
+    windows: 'ctrl+o',
+    linux: 'ctrl+o',
+  },
+  {
+    name: 'closeFileSearch',
+    mac: 'esc',
+    windows: 'esc',
+    linux: 'esc',
   },
 ];
 
