@@ -16,4 +16,12 @@ const RANDOM = {
   1: 1,
 };
 
-export { DEPTH_ENUM, RANDOM };
+const KEYBOARD_SHORTCUTS = [
+  {
+    name: 'toggleSidebar',
+    mac: 'command+b',
+    windows: 'ctrl+b',
+  },
+];
+
+export { DEPTH_ENUM, RANDOM, KEYBOARD_SHORTCUTS };

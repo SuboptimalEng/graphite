@@ -15,6 +15,9 @@
       "
     >
       <Navigation></Navigation>
+      <div class="hidden">
+        <HotKeys></HotKeys>
+      </div>
     </div>
     <div
       class="
@@ -43,9 +46,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Navigation from './components/Navigation.vue';
+
 import Editor from './components/Editor.vue';
+import HotKeys from './components/HotKeys.vue';
 import Sidebar from './components/Sidebar.vue';
+import Navigation from './components/Navigation.vue';
+
 import themes from './utils/themes.ts';
 
 export default {
@@ -55,13 +61,14 @@ export default {
       appTheme: '',
     };
   },
+  components: {
+    Editor,
+    HotKeys,
+    Sidebar,
+    Navigation,
+  },
   mounted() {
     this.setTheme();
-  },
-  components: {
-    Navigation,
-    Sidebar,
-    Editor,
   },
   methods: {
     setTheme() {

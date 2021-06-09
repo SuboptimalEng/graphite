@@ -3,7 +3,10 @@
     <button
       v-for="item in sidebarItems"
       :key="item.name"
-      @click="setActiveSidebarItem(item.name)"
+      @click="
+        showSidebar();
+        setActiveSidebarItem(item.name);
+      "
       class="w-full focus:outline-none"
     >
       <div
@@ -38,7 +41,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['setActiveSidebarItem']),
+    ...mapMutations(['setActiveSidebarItem', 'showSidebar']),
   },
   computed: {
     ...mapGetters(['activeSidebarItem']),

@@ -20,6 +20,12 @@ export default createStore({
     root: '/Users/suboptimaleng/Desktop/graphite',
   },
   mutations: {
+    showSidebar(state) {
+      state.sidebarActive = true;
+    },
+    toggleSidebar(state) {
+      state.sidebarActive = !state.sidebarActive;
+    },
     setActiveSidebarItem(state, item) {
       state.activeSidebarItem = item;
     },
