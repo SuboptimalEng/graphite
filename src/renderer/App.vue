@@ -102,6 +102,7 @@ export default {
 </script>
 
 <style scoped>
+/* INSIGHT: Custom CSS */
 .theme-monokai {
   --sidebar-bg: #272822;
   --sidebar-bg-hover: #f92672;
