@@ -33,6 +33,7 @@ import CodeMirror from 'codemirror';
 import * as marked from 'marked';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
+import 'codemirror/theme/monokai.css';
 import 'codemirror/theme/gruvbox-dark.css';
 import 'codemirror/mode/gfm/gfm';
 import { mapGetters } from 'vuex';

@@ -5,7 +5,6 @@
 @tailwind utilities;
 
 @layer base {
-  /* dracula */
   .theme-dracula {
     /* INSIGHT: Use rgb for transparent screen. */
     /* --sidebar-bg: 40, 42, 54; */

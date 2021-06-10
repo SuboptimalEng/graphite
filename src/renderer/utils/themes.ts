@@ -7,6 +7,10 @@ const themes = {
     codeMirror: 'gruvbox-dark',
     graphite: 'theme-gruvbox',
   },
+  monokai: {
+    codeMirror: 'monokai',
+    graphite: 'theme-monokai',
+  },
 };
 
 export default themes;

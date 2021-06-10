@@ -102,6 +102,14 @@ export default {
 </script>
 
 <style scoped>
+.theme-monokai {
+  --sidebar-bg: #272822;
+  --sidebar-bg-hover: #f92672;
+  --item-active: #ae81ff;
+  --item-text-active: #272822;
+  --text-normal: #f8f8f2;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
