@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       markdown: '',
+      switchingFiles: false,
     };
   },
   mounted() {
@@ -29,16 +30,21 @@ export default {
     this.cm.setSize('full', '100%');
 
     this.cm.on('change', (cm) => {
-      this.markdown = cm.getValue();
-      this.writeFile({
-        path: this.openFilePath,
-        markdown: this.markdown,
-      });
+      // INSIGHT: Don't update CodeMirror when switching files.
+      // INSIGHT: ESPECIALLY DON'T WRITE FILE!!!
+      if (!this.switchingFiles) {
+        this.markdown = cm.getValue();
+        this.writeFile({
+          path: this.openFilePath,
+          markdown: this.markdown,
+        });
+      }
     });
 
     // INSIGHT: handle reply from the backend
     window.ipc.on('READ_FILE', (markdown) => {
       this.cm.setValue(markdown);
+      this.switchingFiles = false;
     });
 
     this.readFile({ path: this.openFilePath });
@@ -55,7 +61,7 @@ export default {
       window.ipc.send('READ_FILE', { path });
     },
     setOpenFile(path) {
-      this.cm.setValue('');
+      this.switchingFiles = true;
       this.readFile({ path });
     },
     setTheme(theme) {
