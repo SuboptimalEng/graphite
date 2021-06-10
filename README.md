@@ -1,4 +1,4 @@
-#### Disclaimer: This repo is for demo purposes only -- DO NOT use this app to edit your markdown files!
+# Disclaimer: This repo is for demo purposes only -- DO NOT use this app to edit your markdown files!
 --- 
 
 # Graphite 
