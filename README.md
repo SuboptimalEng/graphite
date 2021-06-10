@@ -2,4 +2,4 @@
 ---
 
 # Graphite 
-### ✍️ Graphite is a local-first Markdown note-taking app built with Vue.js and Electron.
+### ✍️ A local-first Markdown note-taking app built with Vue.js and Electron.
