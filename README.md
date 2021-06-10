@@ -11,7 +11,7 @@
 - In 2020, I quit my tech job to focus on creating web development tutorials on [YouTube](youtube.com/SuboptimalEng).
 - After spending a few months playing around with different technologies, I decided to focus on Vue + Tailwind.
 - In order to test how far I've come with the tech stack, I made Graphite, a local-first markdown note-taking app.
-- Note: I built Graphite ~1 week so don't mind the code quality or lack of tests.
+- Note: I built Graphite in ~1 week so don't mind the code quality or lack of tests.
 
 ### 👀 Demo
 
