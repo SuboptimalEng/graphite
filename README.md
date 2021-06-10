@@ -1,5 +1,5 @@
 ### ⚠️ This repo is for demo purposes only ⚠️ 
-### ⚠️ DO NOT use Graphite to edit your markdown files ⚠️
+### ⚠️ DO NOT use Graphite to edit local files ⚠️
 ---
 
 # Graphite 
