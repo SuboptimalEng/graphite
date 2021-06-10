@@ -15,10 +15,16 @@
 
 ### 👀 Demo
 
-#### Dracula, Gruvbox, Monokai Themes
+#### Dracula Theme
 
 <img src="/demo/00_dracula.png" width="600">
+
+#### Gruvbox Theme
+
 <img src="/demo/00_gruvbox.png" width="600">
+
+#### Monokai Theme
+
 <img src="/demo/00_monokai.png" width="600">
 
 #### File Search
