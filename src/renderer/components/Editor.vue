@@ -54,7 +54,8 @@ export default {
       // INSIGHT: ask backend to read file
       window.ipc.send('READ_FILE', { path });
     },
-    openFile(path) {
+    setOpenFile(path) {
+      this.cm.setValue('');
       this.readFile({ path });
     },
     setTheme(theme) {
@@ -71,7 +72,7 @@ export default {
   watch: {
     // INSIGHT: this runs openFile if 'store.openFilePath' changes
     theme: 'setTheme',
-    openFilePath: 'openFile',
+    openFilePath: 'setOpenFile',
     lineNumbers: 'setLineNumbers',
   },
 };
