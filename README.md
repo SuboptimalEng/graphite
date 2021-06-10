@@ -8,8 +8,11 @@
 
 ### ✍️ A local-first Markdown note-taking app built with Vue.js and Electron.
 
-In 2020, I quit my tech job to focus on creating web development tutorials on [YouTube channel](youtube.com/SuboptimalEng).
-I've learned quite a bit about Vue.js/Tailwind CSS and wanted to put my skills to the test so I made Graphite.
+- In 2020, I quit my tech job to focus on creating web development tutorials on [YouTube channel](youtube.com/SuboptimalEng).
+- After spending a few months playing around with different technologies, I decided to "get good" at Vue.js + Tailwind CSS.
+- In order to test how far I've come the tech stack, I decided to build Graphite, a simple markdown note-taking app.
+- As you can see from the commit history, I built it in about <10 days so the code quality is pretty bad.
+- Please do not try to build this app locally as it won't work -- the demo should give you an idea of what I made.
 
 ### 📝 Feature Set
 
