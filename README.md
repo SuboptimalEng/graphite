@@ -15,6 +15,10 @@
 
 ### 👀 Demo
 
+#### GIF
+
+<img src="/demo/_graphite.gif" width="600">
+
 #### Dracula Theme
 
 <img src="/demo/00_dracula.png" width="600">
