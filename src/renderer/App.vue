@@ -33,6 +33,13 @@
       "
       v-if="sidebarActive"
     >
+      <input
+        type="text"
+        v-model="sidebarBgColor"
+        placeholder="Set sidebar-bg color..."
+        class="bg-sidebar-bg border focus:outline-none w-full"
+      />
+      <button @click="updateColor" class="border">Update</button>
       <Sidebar></Sidebar>
     </div>
     <div
@@ -68,6 +75,7 @@ export default {
   name: 'App',
   data() {
     return {
+      sidebarBgColor: '',
       appTheme: '',
     };
   },
@@ -86,6 +94,9 @@ export default {
     setTheme() {
       this.appTheme = themes[this.theme].graphite;
     },
+    updateColor() {
+      console.log(this.sidebarBgColor);
+    },
   },
   computed: {
     ...mapGetters([
@@ -101,8 +112,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped >
 /* INSIGHT: Custom CSS */
+/* INSIGHT: This can be copied into chrome Styles section! */
 .theme-monokai {
   --sidebar-bg: #272822;
   --sidebar-bg-hover: #f92672;
