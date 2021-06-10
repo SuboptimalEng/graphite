@@ -17,9 +17,17 @@
 
 #### Dracula, Gruvbox, Monokai Themes
 
-<img src="/demo/00_dracula.png" width="300">
-<img src="/demo/00_gruvbox.png" width="300">
-<img src="/demo/00_monokai.png" width="300">
+<img src="/demo/00_dracula.png" width="600">
+<img src="/demo/00_gruvbox.png" width="600">
+<img src="/demo/00_monokai.png" width="600">
+
+#### File Search
+
+<img src="/demo/02_file_search.png" width="600">
+
+#### Markdown Preview
+
+<img src="/demo/03_md_preview.png" width="600">
 
 ### 💻 Tech Stack
 
