@@ -41,9 +41,8 @@
   - Dracula
   - Gruvbox
   - Monokai
-- Maybe Someday
+- TODO
   - WYSIWYG
-  - Translucent window
   - Add/remove/rename/move folders
   - Watch for file changes in Electron and persist changes automatically
   - Actually release a desktop app for Mac/Windows/Linux
