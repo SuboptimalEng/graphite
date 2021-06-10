@@ -73,6 +73,7 @@ export default createStore({
       state.openFileName = file.name;
       state.openFilePath = file.path;
       state.openFileType = file.type;
+      state.openFileSearch = false;
     },
     toggleLineNumbers(state) {
       state.lineNumbers = !state.lineNumbers;
