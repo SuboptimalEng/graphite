@@ -18,14 +18,14 @@
 ### 💻 Tech Stack
 
 - Stack
-  - Vue.js
-  - Vuex (state management)
-  - Electron (desktop apps ftw)
-  - Tailwind CSS (UI framework)
+  - [Vue.js](https://vuejs.org/)
+  - [Vuex](https://vuex.vuejs.org/) (state management)
+  - [Electron](https://www.electronjs.org/) (desktop apps ftw)
+  - [Tailwind CSS](https://tailwindcss.com/) (UI framework)
 - JS Libraries
-  - Marked (convert markdown to html)
-  - CodeMirror (builing your own editor is hard)
-  - Hotkeys.js (makes keyboard shortcuts easy)
+  - [Marked](https://marked.js.org/) (convert markdown to html)
+  - [CodeMirror](https://codemirror.net/) (builing your own editor is hard)
+  - [Hotkeys](https://github.com/jaywcjlove/hotkeys/) (makes keyboard shortcuts easy)
 
 ### 📝 Feature Set
 
