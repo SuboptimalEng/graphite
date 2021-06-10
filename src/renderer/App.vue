@@ -33,13 +33,6 @@
       "
       v-if="sidebarActive"
     >
-      <input
-        type="text"
-        v-model="sidebarBgColor"
-        placeholder="Set sidebar-bg color..."
-        class="bg-sidebar-bg border focus:outline-none w-full"
-      />
-      <button @click="updateColor" class="border">Update</button>
       <Sidebar></Sidebar>
     </div>
     <div
