@@ -13,7 +13,7 @@
 - In order to test how far I've come with the tech stack, I made Graphite, a local-first markdown note-taking app.
 - Note: I built Graphite in ~1 week so don't mind the code quality or lack of tests.
 
-### 👀 Demo GIF
+### 👀 Demo GIF (takes a few seconds to load)
 
 <img src="/demo/_graphite.gif" width="600">
 
