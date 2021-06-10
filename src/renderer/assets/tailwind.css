@@ -8,7 +8,7 @@
   /* dracula */
   .theme-dracula {
     /* INSIGHT: Use rgb for transparent screen. */
-    --sidebar-bg: 40, 42, 54;
+    /* --sidebar-bg: 40, 42, 54; */
     --sidebar-bg: #282a36;
     --sidebar-bg-hover: #44475a;
     --item-active: #ff79c0;

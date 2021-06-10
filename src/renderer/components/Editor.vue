@@ -92,7 +92,7 @@ export default {
           // INSIGHT: ESPECIALLY DON'T WRITE FILE!!!
           if (!this.switchingFiles) {
             this.markdown = cm.getValue();
-            this.compiledMarkdown = marked(this.markdown, { sanitize: true });
+            this.compiledMarkdown = marked(this.markdown);
             this.writeFile({
               path: this.openFilePath,
               markdown: this.markdown,
