@@ -4,7 +4,7 @@
 
 ---
 
-# Graphite
+# Graphite - [Video Explanation](https://www.youtube.com/watch?v=Z8ufG29c0_A)
 
 ### ✍️ A local-first Markdown note-taking app built with Vue.js, Tailwind, and Electron.
 
