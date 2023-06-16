@@ -4,20 +4,20 @@
 
 ---
 
-# Graphite - [Video Explanation](https://www.youtube.com/watch?v=Z8ufG29c0_A)
+# ✍️ Graphite - [Video Explanation](https://www.youtube.com/watch?v=Z8ufG29c0_A)
 
-### ✍️ A local-first Markdown note-taking app built with Vue.js, Tailwind, and Electron.
+### A local-first Markdown note-taking app built with Vue.js, Tailwind, and Electron.
 
 - In 2020, I quit my tech job to focus on creating web development tutorials on [YouTube](youtube.com/SuboptimalEng).
 - After spending a few months playing around with different technologies, I decided to focus on Vue + Tailwind.
 - In order to test how far I've come with the tech stack, I made Graphite, a local-first markdown note-taking app.
 - Note: I built Graphite in ~1 week so don't mind the code quality or lack of tests.
 
-### 👀 Demo GIF (takes a few seconds to load)
+### Demo GIF (takes a few seconds to load)
 
 <img src="/demo/_graphite.gif" width="600">
 
-### 📸 Images
+### Images
 
 #### Dracula Theme
 
@@ -51,7 +51,7 @@
   - [CodeMirror](https://codemirror.net/) (builing your own editor is hard)
   - [Hotkeys](https://github.com/jaywcjlove/hotkeys/) (makes keyboard shortcuts easy)
 
-### 📝 Feature Set
+### Feature Set
 
 - Basic
   - Add/remove/rename/move files
